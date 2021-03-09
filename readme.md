@@ -1,25 +1,71 @@
-<h1 align = "center">
+<h1 align="center">
     Memory keeper
 </h1>
 
-<img src = 'growing.webp'></img>
+<img align="center" src='growing.webp'></img>
 
 
-<h1 align = "center">
+<h1 align="center">
     What is it
 </h1>
+<p>bot</p>
 
-Telegram bot based on `aiogram`.
+<h1 align="center">
+    Supported message types
+</h1>
 
-It resends all media:
-1) photos
-2) videos
-3) voice messages
-4) gifs
-5) documents
+<div align="center">
+    <table align="center">
+        <thead align="center">
+            <tr align="center">
+                <th align="center">message type</th>
+                <th align="center">can be resend</th>
+                <th align="center">can not be resend</th>
+                <th align="center">can be resend in group</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr>
+                <td align="center">photo</td>
+                <td align="center">🟢</td>
+                <td align="center"></td>
+                <td align="center">🟢</td>
+            </tr>
+            <tr>
+                <td align="center">video</td>
+                <td align="center">🟢</td>
+                <td align="center"></td>
+                <td align="center">🟢</td>
+            </tr>
+            <tr>
+                <td align="center">animation</td>
+                <td align="center">🟢</td>
+                <td align="center"></td>
+                <td align="center">🟢</td>
+            </tr>
+            <tr>
+                <td align="center">document</td>
+                <td align="center">🟢</td>
+                <td align="center"></td>
+                <td align="center">🟢</td>
+            </tr>
+            <tr>
+                <td align="center">voice</td>
+                <td align="center">🟢</td>
+                <td align="center"></td>
+                <td align="center">🟢</td>
+            </tr>
+            <tr>
+                <td align="center">palin text</td>
+                <td align="center"></td>
+                <td align="center">🔴</td>
+                <td align="center">🟢</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-
-<h1 align = "center">
+<h1 align="center">
     Basic idea
 </h1>
 <p align="center">

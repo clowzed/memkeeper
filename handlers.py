@@ -32,8 +32,7 @@ def handle_user(message:aiogram.types.Message, state:aiogram.dispatcher.FSMConte
                                 chat_id = message.chat.id)
         new_user.save()
         return new_user
-    else:
-        return users.get(users.chat_id == message.chat.id)
+    return users.get(users.chat_id == message.chat.id)
 
 def strip_mobile_phone(mobile_phone):
     return "".join([str(num) for num in mobile_phone if num.isdigit()])
@@ -43,11 +42,11 @@ def check_access_by_mobile_phone(message):
         mobile_phone = message.contact.phone_number
         mobile_phone = strip_mobile_phone(mobile_phone)
         return mobile_phone in granted_mobile_phones and message.contact.user_id == message.from_user.id
-    else:
-        user = handle_user(message, None)
-        mobile_phone = user.mobile_phone
-        mobile_phone = strip_mobile_phone(mobile_phone)
-        return mobile_phone in granted_mobile_phones
+
+    user = handle_user(message, None)
+    mobile_phone = user.mobile_phone
+    mobile_phone = strip_mobile_phone(mobile_phone)
+    return mobile_phone in granted_mobile_phones
 
 async def return_to_homepage(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     await state.finish()
@@ -100,7 +99,7 @@ async def handle_user_contact(message:aiogram.types.Message, state:aiogram.dispa
         user.save()
         await accure_message_locking(message, state)
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.PHOTO, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.PHOTO, state = users_states.homepage)
 async def handle_photo(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     photo_data = message.photo.pop()
@@ -118,7 +117,7 @@ async def handle_photo(message:aiogram.types.Message, state:aiogram.dispatcher.F
                                                         caption        = caption)
         new_media_group_file.save()
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.VIDEO, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.VIDEO, state = users_states.homepage)
 async def handle_video(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     video       = message.video
@@ -136,7 +135,7 @@ async def handle_video(message:aiogram.types.Message, state:aiogram.dispatcher.F
                                                         caption        = caption)
         new_media_group_file.save()
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.DOCUMENT, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.DOCUMENT, state = users_states.homepage)
 async def handle_document(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     document       = message.document
@@ -154,7 +153,7 @@ async def handle_document(message:aiogram.types.Message, state:aiogram.dispatche
                                                         caption        = caption)
         new_media_group_file.save()
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.AUDIO, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.AUDIO, state = users_states.homepage)
 async def handle_audio(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     audio          = message.audio
@@ -172,7 +171,7 @@ async def handle_audio(message:aiogram.types.Message, state:aiogram.dispatcher.F
                                                         caption        = caption)
         new_media_group_file.save()
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.ANIMATION, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.ANIMATION, state = users_states.homepage)
 async def handle_animation(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     animation          = message.animation
@@ -190,7 +189,7 @@ async def handle_animation(message:aiogram.types.Message, state:aiogram.dispatch
                                                         caption        = caption)
         new_media_group_file.save()
 
-@dispatcher.message_handler(lambda message: check_access_by_mobile_phone(message), content_types = aiogram.types.ContentTypes.VOICE, state = users_states.homepage)
+@dispatcher.message_handler(check_access_by_mobile_phone, content_types = aiogram.types.ContentTypes.VOICE, state = users_states.homepage)
 async def handle_voice(message:aiogram.types.Message, state:aiogram.dispatcher.FSMContext):
     media_group_id = message.media_group_id or media_group_files.unique_id()
     voice          = message.voice

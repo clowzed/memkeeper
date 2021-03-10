@@ -39,7 +39,7 @@ git clone https://github.com/clowzed/memkeeper.git
 cd memkeeper
 ```
 
-<h4 align="center"> Install <code><a href="">pipenv</a></code> if not installed</h4>
+<h4 align="center"> Install <code><a href="https://github.com/pypa/pipenv">pipenv</a></code> if not installed</h4>
 
 ```bash
 python3 -m pip install pipenv
